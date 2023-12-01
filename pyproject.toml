@@ -1,0 +1,42 @@
+[build-system]
+requires=["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["advent*"]
+
+[project]
+name = "advent"
+authors = [
+    {name = "Thomas Gaime", email = "thomasgaime@gmail.com"}
+]
+description = "Solution of the advent of code 2023"
+readme = "README.md"
+requires-python = ">=3.8"
+license = {file = "LICENCE"}
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Development Status :: 4 - Beta",
+    "Environment :: Console",
+    "Intended Audience :: Developers",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    ""
+]
+version = "0.1.0rc0"
+dependencies = [
+    "pytest",
+    "mock",
+    "ruff",
+    "build",
+    "pyyaml",
+    "importlib-resources",
+    "rich"
+]
+
+[project.urls]
+Homepage = "https://github.com/itom34/advent_of_code_2023"
+
+
+[project.scripts]
+advent23 = "advent.cli:entry_point"
