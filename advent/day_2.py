@@ -1,6 +1,10 @@
 from pathlib import Path
 import re
 
+RED_QUANTITY = 12
+GREEN_QUANTITY = 13
+BLUE_QUANTITY = 14
+
 
 def parser(file: Path) -> dict:
     """
@@ -67,4 +71,54 @@ def parser_set_key_values(text: str) -> tuple:
     quantity, colour = re.findall(r"(\d+) (\w+)", text)[0]
 
     return colour, int(quantity)
+
+
+def possible_game(game: list) -> bool:
+    """
+    Return true if a game is possible
+    :param game: a game
+    :return: True if the game is possible
+    """
+    possible = True
+    for a_set in game:
+        for colour, quantity in a_set:
+            if colour == 'red' and quantity > RED_QUANTITY:
+                return False
+
+            elif colour == 'green' and quantity > GREEN_QUANTITY:
+                return False
+
+            elif colour == 'blue' and quantity > BLUE_QUANTITY:
+                return False
+
+    return True
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

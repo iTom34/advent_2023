@@ -1,6 +1,6 @@
 import pytest
 
-from advent.day_2 import parser, split_games, parser_set_key_values
+from advent.day_2 import parser, split_games, parser_set_key_values, possible_game
 from importlib_resources import files
 from pathlib import Path
 
@@ -53,3 +53,12 @@ def test_parser_build_games():
                                             (' 2 green', ('green', 2))])
 def test_parser_set_key_values(text: str, expected: int):
     assert parser_set_key_values(text) == expected
+
+
+@pytest.mark.parametrize("game, expected", [(EXAMPLE_PARSED[1], True),
+                                            (EXAMPLE_PARSED[2], True),
+                                            (EXAMPLE_PARSED[3], False),
+                                            (EXAMPLE_PARSED[4], False),
+                                            (EXAMPLE_PARSED[5], True)])
+def test_possible_game(game: list, expected: bool):
+    assert possible_game(game) == expected
