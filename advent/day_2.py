@@ -58,7 +58,7 @@ def split_games(lines: list[str]) -> dict:
 
     games: dict = {}
     for line in lines:
-        result = re.match(r"Game (\d): (.+)", line)
+        result = re.match(r"Game (\d+): (.+)", line)
 
         if result is not None:
             games[int(result[1])] = result[2]
