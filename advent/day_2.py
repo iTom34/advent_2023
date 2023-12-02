@@ -39,9 +39,9 @@ def parser(file: Path) -> dict:
     for game_id, sets in tmp_1.items():
         build_sets = []
         for a_set in sets:
-            build_set = []
+            build_set = set()
             for quantity in a_set:
-                build_set.append(parser_set_key_values(quantity))
+                build_set.add(parser_set_key_values(quantity))
 
             build_sets.append(build_set)
 
@@ -62,8 +62,9 @@ def split_games(lines: list[str]) -> dict:
     return games
 
 
-def parser_set_key_values(text: str) -> dict:
+def parser_set_key_values(text: str) -> tuple:
 
     quantity, colour = re.findall(r"(\d+) (\w+)", text)[0]
 
-    return {colour: int(quantity)}
+    return colour, int(quantity)
+
