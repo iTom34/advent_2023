@@ -94,6 +94,23 @@ def possible_game(sets: list) -> bool:
     return True
 
 
+def puzzle_1(input_puzzle: Path) -> int:
+    """
+    Solves the puzzle 1
+    :param input_puzzle: Input of the puzzle
+    :return: The solution
+    """
+    my_sum = 0
+
+    games = parser(input_puzzle)
+
+    for game_id, sets in games.items():
+        if possible_game(sets) is True:
+            my_sum += game_id
+
+    return my_sum
+
+
 
 
 

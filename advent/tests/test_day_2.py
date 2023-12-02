@@ -1,6 +1,6 @@
 import pytest
 
-from advent.day_2 import parser, split_games, parser_set_key_values, possible_game
+from advent.day_2 import parser, split_games, parser_set_key_values, possible_game, puzzle_1
 from importlib_resources import files
 from pathlib import Path
 
@@ -62,3 +62,7 @@ def test_parser_set_key_values(text: str, expected: int):
                                             (EXAMPLE_PARSED[5], True)])
 def test_possible_game(game: list, expected: bool):
     assert possible_game(game) == expected
+
+
+def test_puzzle_1(example_puzzle_1):
+    assert puzzle_1(example_puzzle_1) == 8
