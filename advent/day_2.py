@@ -73,14 +73,14 @@ def parser_set_key_values(text: str) -> tuple:
     return colour, int(quantity)
 
 
-def possible_game(game: list) -> bool:
+def possible_game(sets: list) -> bool:
     """
     Return true if a game is possible
-    :param game: a game
+    :param sets: a game
     :return: True if the game is possible
     """
     possible = True
-    for a_set in game:
+    for a_set in sets:
         for colour, quantity in a_set:
             if colour == 'red' and quantity > RED_QUANTITY:
                 return False
