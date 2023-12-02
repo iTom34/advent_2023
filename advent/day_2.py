@@ -138,7 +138,13 @@ def computer_power(minimums: dict) -> int:
     :param minimums:
     :return:
     """
-    pass
+    my_sum = 1
+
+    for quantity in minimums.values():
+        my_sum *= quantity
+
+    return my_sum
+
 
 def puzzle_2(input_puzzle: Path) -> int:
     """

@@ -91,3 +91,12 @@ def test_puzzle_1(fixture_name: str, expected: int, request):
                                             (EXAMPLE_PARSED[5], {'red': 6, 'green': 3, 'blue': 2})])
 def test_minimum_cubes(sets: list, expected: dict):
     assert minimum_cubes(sets) == expected
+
+
+@pytest.mark.parametrize("minimums, expected", [({'red': 4, 'green': 2, 'blue': 6}, 48),
+                                                ({'red': 1, 'green': 3, 'blue': 4}, 12),
+                                                ({'red': 20, 'green': 13, 'blue': 6}, 1560),
+                                                ({'red': 14, 'green': 3, 'blue': 15}, 630),
+                                                ({'red': 6, 'green': 3, 'blue': 2}, 36)])
+def test_compute_power(minimums: dict, expected: int):
+    assert computer_power(minimums) == expected
