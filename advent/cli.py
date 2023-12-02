@@ -36,3 +36,7 @@ def entry_point():
         if args.puzzle_number == '1':
             result = advent.day_2.puzzle_1(data_input)
             print(f"D02P1 - Solution {result}")
+
+        elif args.puzzle_number == '2':
+            result = advent.day_2.puzzle_2(data_input)
+            print(f"D02P2 - Solution {result}")

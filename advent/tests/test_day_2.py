@@ -100,3 +100,10 @@ def test_minimum_cubes(sets: list, expected: dict):
                                                 ({'red': 6, 'green': 3, 'blue': 2}, 36)])
 def test_compute_power(minimums: dict, expected: int):
     assert computer_power(minimums) == expected
+
+
+@pytest.mark.parametrize("fixture_name, expected", [("f_example_puzzle_1", 2286 + 36),
+                                                    ("f_puzzle_1", 76008)])
+def test_puzzle_2(fixture_name: str, expected: int, request):
+    input_file = request.getfixturevalue(fixture_name)
+    assert puzzle_2(input_file) == expected

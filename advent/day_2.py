@@ -152,34 +152,16 @@ def puzzle_2(input_puzzle: Path) -> int:
     :param input_puzzle:
     :return: Solution
     """
-    pass
+    my_sum = 0
 
+    games = parser(input_puzzle)
+    minimums: list[dict] = []
 
+    for sets in games.values():
+        minimums.append(minimum_cubes(sets))
 
+    my_sum = 0
+    for my_minimum in minimums:
+        my_sum += computer_power(my_minimum)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    return my_sum
