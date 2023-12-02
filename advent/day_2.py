@@ -110,6 +110,44 @@ def puzzle_1(input_puzzle: Path) -> int:
 
     return my_sum
 
+# ---- Puzzle 2 ----
+
+
+def minimum_cubes(sets: list) -> dict:
+    """
+    Find the minimum number of cubes necessary to a game to be possible
+    :param sets: All the sets of a game
+    :return: Dictionary with the minimum of cubes
+    """
+    minimums = {}
+    for a_set in sets:
+        for colour, quantity in a_set:
+            if colour not in minimums:
+                minimums[colour] = quantity
+
+            else:
+                if minimums[colour] < quantity:
+                    minimums[colour] = quantity
+
+    return minimums
+
+
+def computer_power(minimums: dict) -> int:
+    """
+    Computes the power of the cubes
+    :param minimums:
+    :return:
+    """
+    pass
+
+def puzzle_2(input_puzzle: Path) -> int:
+    """
+    Solves the puzzle 2
+    :param input_puzzle:
+    :return: Solution
+    """
+    pass
+
 
 
 

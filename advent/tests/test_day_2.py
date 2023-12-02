@@ -1,6 +1,7 @@
 import pytest
 
-from advent.day_2 import parser, split_games, parser_set_key_values, possible_game, puzzle_1
+from advent.day_2 import parser, split_games, parser_set_key_values, possible_game, puzzle_1, minimum_cubes, \
+    computer_power, puzzle_2
 from importlib_resources import files
 from pathlib import Path
 
@@ -28,7 +29,7 @@ EXAMPLE_PARSED = {1: [{('blue', 3), ('red', 4)},
                   5: [{('blue', 1), ('red', 6), ('green', 3)},
                       {('red', 1), ('blue', 2), ('green', 2)}],
                   10: [{('blue', 1), ('red', 6), ('green', 3)},
-                      {('red', 1), ('blue', 2), ('green', 2)}]}
+                       {('red', 1), ('blue', 2), ('green', 2)}]}
 
 
 @pytest.fixture
@@ -80,3 +81,13 @@ def test_possible_game(game: list, expected: bool):
 def test_puzzle_1(fixture_name: str, expected: int, request):
     input_file = request.getfixturevalue(fixture_name)
     assert puzzle_1(input_file) == expected
+
+
+# ---- Puzzle 2 ----
+@pytest.mark.parametrize("sets, expected", [(EXAMPLE_PARSED[1], {'red': 4, 'green': 2, 'blue': 6}),
+                                            (EXAMPLE_PARSED[2], {'red': 1, 'green': 3, 'blue': 4}),
+                                            (EXAMPLE_PARSED[3], {'red': 20, 'green': 13, 'blue': 6}),
+                                            (EXAMPLE_PARSED[4], {'red': 14, 'green': 3, 'blue': 15}),
+                                            (EXAMPLE_PARSED[5], {'red': 6, 'green': 3, 'blue': 2})])
+def test_minimum_cubes(sets: list, expected: dict):
+    assert minimum_cubes(sets) == expected
