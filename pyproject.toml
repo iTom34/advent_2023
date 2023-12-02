@@ -12,7 +12,7 @@ authors = [
 ]
 description = "Solution of the advent of code 2023"
 readme = "README.md"
-requires-python = ">=3.8"
+requires-python = ">=3.10"
 license = {file = "LICENCE"}
 classifiers = [
     "Programming Language :: Python :: 3",
@@ -35,7 +35,7 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/itom34/advent_of_code_2023"
+Homepage = "https://github.com/itom34/advent_2023"
 
 
 [project.scripts]
