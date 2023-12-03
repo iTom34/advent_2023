@@ -14,6 +14,9 @@ class DigitCoordinates:
         result_2 = self.column == other.column
         return result_1 and result_2
 
+    def __repr__(self):
+        return f"({self.line}, {self.column})"
+
 
 class Number:
     def __init__(self, value: int, digit_coordinates: frozenset[DigitCoordinates]):
@@ -32,7 +35,7 @@ class Number:
         result = f"{self.value}: "
 
         for a_digit_coordinates in self.digit_coordinates:
-            result += f"({a_digit_coordinates}) "
+            result += f"{a_digit_coordinates} "
 
         return result
 
@@ -43,6 +46,7 @@ class Number:
 
     def __hash__(self):
         return hash((self.value, self.digit_coordinates))
+
 
 def import_puzzle(input_file: Path) -> list[str]:
     """
@@ -66,7 +70,32 @@ def find_numbers(text: list[str]) -> set[Number]:
     :param text:
     :return:
     """
-    pass
+    result: list[Number] = []
+
+    for line_index, line in enumerate(text):
+        number_value = 0
+        digit_coordinates = []
+
+        for column_index, car in enumerate(line):
+            # A Number
+            if car.isnumeric():
+                number_value *= 10
+                number_value += int(car)
+                digit_coordinates.append(DigitCoordinates(line_index, column_index))
+
+            # Not a number and not empty
+            elif len(digit_coordinates) != 0:
+                result.append(Number(number_value, frozenset(digit_coordinates)))
+                number_value = 0
+                digit_coordinates = []
+
+            # End of line and not empty
+            if column_index == (len(line) - 1) and len(digit_coordinates) != 0:
+                result.append(Number(number_value, frozenset(digit_coordinates)))
+                number_value = 0
+                digit_coordinates = []
+
+    return result
 
 
 def has_adjacent_symbol(coordinates: DigitCoordinates) -> bool:
