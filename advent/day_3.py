@@ -98,11 +98,63 @@ def find_numbers(text: list[str]) -> set[Number]:
     return result
 
 
-def has_adjacent_symbol(coordinates: DigitCoordinates) -> bool:
+def car_has_adjacent_symbol(text: list[str], coordinates: DigitCoordinates) -> bool:
     """
     For a coordinates, check surrouding for a symbol
     :param coordinates: Coordinates to check
     :return: True if surrounded by a symbol
     """
-    pass
+    max_index_column = len(text[0]) - 1
+    max_index_line = len(text) - 1
+    line = coordinates.line
+    column = coordinates.column
+
+    top_condition = line - 1 >= 0
+    bottom_condition = line + 1 <= max_index_line
+    left_condition = column - 1 >= 0
+    right_condition = column + 1 <= max_index_column
+
+    result = False
+
+    # Top left
+    if top_condition and left_condition:
+        car = text[line - 1][column - 1]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Top
+    if top_condition:
+        car = text[line - 1][column]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Top right
+    if top_condition and right_condition:
+        car = text[line - 1][column + 1]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Right
+    if right_condition:
+        car = text[line][column + 1]
+        result |= (not  car.isnumeric()) and car != '.'
+
+    # Bottom Right
+    if bottom_condition and right_condition:
+        car = text[line + 1][column + 1]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Bottom
+    if bottom_condition:
+        car = text[line + 1][column]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Bottom left
+    if bottom_condition and left_condition:
+        car = text[line + 1][column - 1]
+        result |= (not car.isnumeric()) and car != '.'
+
+    # Left
+    if left_condition:
+        car = text[line][column - 1]
+        result |= (not car.isnumeric()) and car != '.'
+
+    return result
 

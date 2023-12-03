@@ -2,7 +2,7 @@ import pytest
 from pathlib import Path
 from importlib_resources import files
 
-from advent.day_3 import import_puzzle, find_numbers, has_adjacent_symbol, Number, DigitCoordinates
+from advent.day_3 import import_puzzle, find_numbers, car_has_adjacent_symbol, Number, DigitCoordinates
 
 import advent.tests.resources.day_3
 
@@ -111,3 +111,20 @@ def test_import_file(f_example_puzzle):
 
 def test_find_numbers():
     assert find_numbers(EXAMPLE_PUZZLE_PARSED) == NUMBERS_IN_PUZZLE
+
+
+@pytest.mark.parametrize("coordinates, expected", [(DigitCoordinates(0, 0), False),
+                                                   (DigitCoordinates(0, 9), False),
+                                                   (DigitCoordinates(9, 0), False),
+                                                   (DigitCoordinates(9, 9), False),
+                                                   (DigitCoordinates(3, 1), False),
+                                                   (DigitCoordinates(4, 2), True),
+                                                   (DigitCoordinates(3, 2), True),
+                                                   (DigitCoordinates(3, 3), True),
+                                                   (DigitCoordinates(3, 4), True),
+                                                   (DigitCoordinates(4, 4), True),
+                                                   (DigitCoordinates(5, 4), True),
+                                                   (DigitCoordinates(5, 3), True),
+                                                   (DigitCoordinates(5, 2), True),])
+def test_car_has_adjacent_symbol(coordinates: DigitCoordinates, expected):
+    assert car_has_adjacent_symbol(EXAMPLE_PUZZLE_PARSED, coordinates) == expected
