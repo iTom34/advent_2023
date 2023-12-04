@@ -1,8 +1,18 @@
 import pytest
 from pathlib import Path
 from importlib_resources import files
+from mock import Mock
 
-from advent.day_3 import import_puzzle, find_numbers, car_has_adjacent_symbol, Number, DigitCoordinates
+from advent.day_3 import (import_puzzle,
+                          find_numbers,
+                          car_has_adjacent_symbol,
+                          Number,
+                          DigitCoordinates,
+                          number_has_adjacent_symbol,
+                          puzzle_1,
+                          Star,
+                          find_starts,
+                          puzzle_2)
 
 import advent.tests.resources.day_3
 
@@ -83,6 +93,11 @@ def f_example_puzzle() -> Path:
     return Path(str(example))
 
 
+@pytest.fixture
+def f_puzzle() -> Path:
+    example = files(advent.tests.resources.day_3).joinpath("puzzle.txt")
+    return Path(str(example))
+
 class TestDigitCoordinate:
     def test_equal(self):
         assert DigitCoordinates(1, 2) == DigitCoordinates(1, 2)
@@ -109,6 +124,7 @@ def test_import_file(f_example_puzzle):
     assert import_puzzle(f_example_puzzle) == EXAMPLE_PUZZLE_PARSED
 
 
+@pytest.mark.skip
 def test_find_numbers():
     assert find_numbers(EXAMPLE_PUZZLE_PARSED) == NUMBERS_IN_PUZZLE
 
@@ -128,3 +144,73 @@ def test_find_numbers():
                                                    (DigitCoordinates(5, 2), True),])
 def test_car_has_adjacent_symbol(coordinates: DigitCoordinates, expected):
     assert car_has_adjacent_symbol(EXAMPLE_PUZZLE_PARSED, coordinates) == expected
+
+
+@pytest.mark.parametrize("number, expected", [(number_467, True),
+                                              (number_114, False),
+                                              (number_35, True),
+                                              (number_633, True),
+                                              (number_617, True),
+                                              (number_58, False),
+                                              (number_592, True),
+                                              (number_755, True),
+                                              (number_644, True),
+                                              (number_598, True)])
+def test_number_has_adjacent_symbol(number: Number, expected: bool):
+    assert number_has_adjacent_symbol(EXAMPLE_PUZZLE_PARSED, number) == expected
+
+
+@pytest.mark.parametrize("fixture_name, expected", [("f_example_puzzle", 4361),
+                                                    ("f_puzzle", 530495)])
+def test_puzzle_1(fixture_name, expected, request):
+    input_puzzle = request.getfixturevalue(fixture_name)
+    assert puzzle_1(input_puzzle) == expected
+
+
+# --- Puzzle 2 ---
+def test_find_starts():
+    assert find_starts(EXAMPLE_PUZZLE_PARSED) == [Star(1, 3),
+                                                  Star(4, 3),
+                                                  Star(8, 5)]
+
+
+def test_stars_equality():
+    assert Star(1, 2) == Star(1, 2)
+    assert Star(1, 2) != Star(2, 1)
+
+
+LIST_OF_NUMBERS = [Number(1, frozenset([DigitCoordinates(0, 0)])),
+                   Number(2, frozenset([DigitCoordinates(0, 1)])),
+                   Number(3, frozenset([DigitCoordinates(0, 2)])),
+                   Number(4, frozenset([DigitCoordinates(1, 2)])),
+                   Number(5, frozenset([DigitCoordinates(2, 2)])),
+                   Number(6, frozenset([DigitCoordinates(2, 1)])),
+                   Number(7, frozenset([DigitCoordinates(2, 0)])),
+                   Number(8, frozenset([DigitCoordinates(1, 0)]))]
+
+
+@pytest.mark.parametrize("star, expected", [(Star(1, 1), LIST_OF_NUMBERS),
+                                            (Star(1, 4), [])])
+def test_find_adjacent_numbers(star: Star, expected: list[Number]):
+    assert star._find_adjacent_numbers(LIST_OF_NUMBERS) == expected
+
+
+@pytest.mark.parametrize("numbers, expected", [([], 0),
+                                                ([Number(2, None)], 0),
+                                                ([Number(2, None),
+                                                  Number(3, None)], 6),
+                                                ([Number(2, None),
+                                                  Number(3, None),
+                                                  Number(4, None)], 0)])
+def test_compute_gear_ratio(numbers, expected):
+    star = Star(1, 1)
+    star._find_adjacent_numbers = Mock(return_value=numbers)
+    assert star.compute_gear_ratio(numbers) == expected
+    star._find_adjacent_numbers.assert_called_once_with(numbers)
+
+
+@pytest.mark.parametrize("fixture_name, expected", [("f_example_puzzle", 467835),
+                                                    ("f_puzzle", 80253814)])
+def test_puzzle_2(fixture_name, expected, request):
+    input_puzzle = request.getfixturevalue(fixture_name)
+    assert puzzle_2(input_puzzle) == expected

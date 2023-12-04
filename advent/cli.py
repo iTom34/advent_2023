@@ -3,6 +3,7 @@ from pathlib import Path
 
 import advent.day_1
 import advent.day_2
+import advent.day_3
 
 
 def entry_point():
@@ -10,7 +11,7 @@ def entry_point():
                                      description="Solutions of the calendar 2023")
 
     parser.add_argument("day",
-                        choices=['1', '2'],
+                        choices=['1', '2', '3'],
                         help="Day of the puzzle")
 
     parser.add_argument("puzzle_number",
@@ -40,3 +41,12 @@ def entry_point():
         elif args.puzzle_number == '2':
             result = advent.day_2.puzzle_2(data_input)
             print(f"D02P2 - Solution {result}")
+
+    elif args.day == '3':
+        if args.puzzle_number == '1':
+            result = advent.day_3.puzzle_1(data_input)
+            print(f"D03P1 - Solution {result}")
+
+        elif args.puzzle_number == '2':
+            result = advent.day_3.puzzle_2(data_input)
+            print(f"D03P2 - Solution {result}")

@@ -158,3 +158,127 @@ def car_has_adjacent_symbol(text: list[str], coordinates: DigitCoordinates) -> b
 
     return result
 
+
+def number_has_adjacent_symbol(text: list[str], number: Number) -> bool:
+    """
+    Return True if the number has an adjacent symbol
+    """
+
+    for coordinates in number.digit_coordinates:
+        if car_has_adjacent_symbol(text, coordinates):
+            return True
+
+    return False
+
+
+def puzzle_1(input_puzzle: Path) -> int:
+    """
+    Solves puzzle_1
+    """
+    sum = 0
+
+    text = import_puzzle(input_puzzle)
+    numbers = find_numbers(text)
+
+    for number in numbers:
+        if number_has_adjacent_symbol(text, number):
+            sum += number.value
+
+    return sum
+
+
+# --- Puzzle 2 ---
+
+class Star:
+    """
+    Holds a star position
+    """
+    def __init__(self, line: int, column: int):
+        self.line: int = line
+        self.column: int = column
+
+    def __eq__(self, other):
+        return self.line == other.line and self.column == other.column
+
+    def __repr__(self):
+        return f"({self.line}, {self.column})"
+
+    def _find_adjacent_numbers(self, numbers: list[Number]) -> list[tuple]:
+        """
+        Finds the adjacent numbers and return them in list of tuple.
+        """
+        adjacent_numbers = []
+        for number in numbers:
+            for coordinate in number.digit_coordinates:
+
+                if (coordinate.line == (self.line - 1)) and (coordinate.column == (self.column - 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == (self.line - 1)) and (coordinate.column == self.column):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == (self.line - 1)) and (coordinate.column == (self.column + 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == self.line) and (coordinate.column == (self.column + 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == (self.line + 1)) and (coordinate.column == (self.column + 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == (self.line + 1)) and (coordinate.column == self.column):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == (self.line + 1)) and (coordinate.column == (self.column - 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+                elif (coordinate.line == self.line) and (coordinate.column == (self.column - 1)):
+                    adjacent_numbers.append(number)
+                    break
+
+        return adjacent_numbers
+
+    def compute_gear_ratio(self, numbers: list[Number]) -> int:
+        """
+        Compute the gear ratio of a star
+        """
+        adjacent_numbers = self._find_adjacent_numbers(numbers)
+
+        if len(adjacent_numbers) == 2:
+            return adjacent_numbers[0].value * adjacent_numbers[1].value
+
+        return 0
+
+
+def find_starts(puzzle_input: list[str]) -> list[Star]:
+    """
+    Find the start in a puzzle
+    return a list with all the starts found
+    """
+    stars = []
+    for line_index, line in enumerate(puzzle_input):
+        for column_index, car in enumerate(line):
+            if car == '*':
+                stars.append(Star(line_index, column_index))
+
+    return stars
+
+
+def puzzle_2(input_puzzle: Path) -> int:
+    text = import_puzzle(input_puzzle)
+    numbers = find_numbers(text)
+    stars = find_starts(text)
+
+    sum = 0
+
+    for star in stars:
+        sum += star.compute_gear_ratio(numbers)
+
+    return sum
