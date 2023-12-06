@@ -35,6 +35,12 @@ class Card:
         return pow(2, number_of_match - 1)
 
 
+class CardNewRules(Card):
+    def __init__(self, card_number: int, winning_numbers: list[int], your_numbers: list[int]):
+        super().__init__(card_number, winning_numbers, your_numbers)
+        self.number_of_cards = 1
+
+
 def import_puzzle(input_file: Path) -> list[Card]:
     """
     Imports the file and converts it into a list of strings
@@ -75,5 +81,51 @@ def puzzle_1(input_puzzle: Path) -> int:
 
     for card in cards:
         sum += card.computer_score()
+
+    return sum
+
+
+def import_puzzle_2(input_file: Path) -> list[CardNewRules]:
+
+    with open(input_file, 'r') as file:
+        lines = file.readlines()
+
+    cards = []
+    for line in lines:
+        match = re.match(REGULAR_EXPRESSION, line)
+        groups = match.groups()
+
+        card_id = int(groups[0])
+        winning_numbers = []
+        for index in range(1, 11):
+            winning_numbers.append(int(groups[index]))
+
+        your_numbers = []
+        for index in range(11, 36):
+            your_numbers.append(int(groups[index]))
+
+        cards.append(CardNewRules(card_number=card_id,
+                                  winning_numbers=winning_numbers,
+                                  your_numbers=your_numbers))
+
+    return cards
+
+
+def process_copies(cards: list[CardNewRules]):
+    for index, card in enumerate(cards):
+        number_of_match = card.number_of_match()
+
+        if number_of_match != 0:
+            for sub_index in range(index + 1, index + number_of_match + 1):
+                cards[sub_index].number_of_cards += card.number_of_cards
+
+
+def puzzle_2(input_puzzle: Path) -> int:
+    cards = import_puzzle_2(input_puzzle)
+    process_copies(cards)
+
+    sum = 0
+    for card in cards:
+        sum += card.number_of_cards
 
     return sum
