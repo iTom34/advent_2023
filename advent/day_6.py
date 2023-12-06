@@ -56,3 +56,8 @@ def puzzle_1(races: list[Race]):
         product *= race.get_number_of_ways_to_beat_record()
 
     return product
+
+
+def puzzle_2(race: Race):
+    return race.get_number_of_ways_to_beat_record()
+

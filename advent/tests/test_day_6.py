@@ -1,6 +1,6 @@
 import pytest
 
-from advent.day_5 import ACCELERATION_RATE, Race, puzzle_1, puzzle_2
+from advent.day_6 import ACCELERATION_RATE, Race, puzzle_1, puzzle_2
 
 
 @pytest.fixture
@@ -103,3 +103,9 @@ def test_puzzle_1(fixture_name: str, expected: int, request):
     races = request.getfixturevalue(fixture_name)
     assert puzzle_1(races) == expected
 
+
+@pytest.mark.parametrize("fixture_name, expected", [("f_puzzle_2_example", 71503),
+                                                    ("f_puzzle_2", 39132886)])
+def test_puzzle_2(fixture_name: str, expected: int, request):
+    races = request.getfixturevalue(fixture_name)
+    assert puzzle_2(races) == expected
