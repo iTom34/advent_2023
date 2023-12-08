@@ -158,20 +158,6 @@ class Hand:
         return not result
 
 
-MAP_CAR_CARD = {'A', Card.a,
-                'K', Card.k,
-                'Q', Card.q,
-                'J', Card.j,
-                '9', Card.nine,
-                '8', Card.height,
-                '7', Card.seven,
-                '6', Card.six,
-                '5', Card.five,
-                '4', Card.four,
-                '3', Card.three,
-                '2', Card.two}
-
-
 def car_to_card(car: str) -> Card:
     if car == 'A':
         return Card.a
@@ -240,3 +226,4 @@ def puzzle_1(input_file: Path) -> int:
         result += (index + 1) * hand.beat
 
     return result
+
