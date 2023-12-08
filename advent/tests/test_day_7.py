@@ -233,7 +233,7 @@ class TestHand:
 
 
 @pytest.mark.parametrize("puzzle_input, expected", [("f_example", 6440),
-                                                    ("f_puzzle", 0)])
+                                                    ("f_puzzle", 246644206)])
 def test_puzzle(puzzle_input: str, expected: int, request):
     puzzle_file = request.getfixturevalue(puzzle_input)
     assert puzzle_1(puzzle_file) == expected
