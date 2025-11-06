@@ -1,20 +1,37 @@
 import re
 from pathlib import Path
+import advent.day
 
 
-def puzzle_1(input: Path) -> int:
-    """
-    :param input: input of the puzzle
-    :return: solution of the puzzle
-    """
+class Day1(advent.day.Day):
+    def puzzle_1(self, input: Path) -> int:
+        """
+        :param input: input of the puzzle
+        :return: solution of the puzzle
+        """
 
-    sum = 0
+        sum = 0
 
-    with open(input, 'r') as file:
-        for line in file.readlines():
-            sum += find_last_and_first_digit(line)
+        with open(input, 'r') as file:
+            for line in file.readlines():
+                sum += find_last_and_first_digit(line)
 
-    return sum
+        return sum
+
+    def puzzle_2(self, source: Path) -> int:
+        """
+        Solves puzzle 2 of day 1
+        :param source: File containing the input of the puzzle
+        :return: Solution of the puzzle
+        """
+
+        sum = 0
+
+        with open(source, 'r') as file:
+            for line in file.readlines():
+                sum += find_first_and_last_digit_puzzle_2(line)
+
+        return sum
 
 
 def find_last_and_first_digit(input: str) -> int:
@@ -109,27 +126,7 @@ def find_first_and_last_digit_puzzle_2(text: str) -> int:
     return first_digit * 10 + last_digit
 
 
-def puzzle_2(source: Path) -> int:
-    """
-    Solves puzzle 2 of day 1
-    :param source: File containing the input of the puzzle
-    :return: Solution of the puzzle
-    """
-
-    sum = 0
-
-    with open(source, 'r') as file:
-        for line in file.readlines():
-            sum += find_first_and_last_digit_puzzle_2(line)
-
-    return sum
-
-
-
-
-
-
-
+day1 = Day1()
 
 
 

@@ -1,11 +1,12 @@
 import argparse
 from pathlib import Path
 
+import advent.year_2023.day_1
 import advent.day_1
 import advent.day_2
 import advent.day_3
 import advent.day_4
-import advent.year_2025.day_2025_1
+import advent.year_2025.day_1
 
 def entry_point():
     parser = argparse.ArgumentParser(prog="Advent of code 2023",
@@ -13,7 +14,7 @@ def entry_point():
 
     parser.add_argument("year",
                         choices=['2023', '2025'],
-                        help="Day of the puzzle")
+                        help="Year of the puzzle")
 
     parser.add_argument("day",
                         choices=['1', '2', '3', '4'],
@@ -29,49 +30,23 @@ def entry_point():
     args = parser.parse_args()
     data_input = Path(args.data_input)
 
-    advent_2025 = {'1': advent.year_2025.day_2025_1.day1}
+    advent_2023 = {'1': advent.year_2023.day_1.day1}
+    advent_2025 = {'1': advent.year_2025.day_1.day1}
+    years = {'2025': advent_2025,
+             '2023': advent_2023}
 
-    if args.year == '2025':
-        if args.day in advent_2025:
+    if args.year in years:
+        year = years[args.year]
+        if args.day in year:
+            day = year[args.day]
             if args.puzzle_number == '1':
-                advent_2025[args.day].puzzle_1(args.data_input)
+                day.puzzle_1(args.data_input)
             elif args.puzzle_number == '2':
-                advent_2025[args.day].puzzle_2(args.data_input)
+                day.puzzle_2(args.data_input)
             else:
-                print("Unsupported puzzle number")
+                print(f"Puzzle {args.puzzle_number} is not implemented")
+        else:
+            print(f"Day {args.day} is not implemented")
+    else:
+        print(f"Year {args.year} is not implemented")
 
-    elif args.day == '1':
-        if args.puzzle_number == '1':
-            result = advent.day_1.puzzle_1(data_input)
-            print(f"D01P1 - Solution {result}")
-
-        elif args.puzzle_number == '2':
-            result = advent.day_1.puzzle_2(data_input)
-            print(f"D01P2 - Solution {result}")
-
-    elif args.day == '2':
-        if args.puzzle_number == '1':
-            result = advent.day_2.puzzle_1(data_input)
-            print(f"D02P1 - Solution {result}")
-
-        elif args.puzzle_number == '2':
-            result = advent.day_2.puzzle_2(data_input)
-            print(f"D02P2 - Solution {result}")
-
-    elif args.day == '3':
-        if args.puzzle_number == '1':
-            result = advent.day_3.puzzle_1(data_input)
-            print(f"D03P1 - Solution {result}")
-
-        elif args.puzzle_number == '2':
-            result = advent.day_3.puzzle_2(data_input)
-            print(f"D03P2 - Solution {result}")
-
-    elif args.day == '4':
-        if args.puzzle_number == '1':
-            result = advent.day_4.puzzle_1(data_input)
-            print(f"D04P1 - Solution {result}")
-
-        elif args.puzzle_number == '2':
-            result = advent.day_4.puzzle_2(data_input)
-            print(f"D04P2 - Solution {result}")
