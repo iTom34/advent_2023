@@ -5,11 +5,16 @@ import advent.day_1
 import advent.day_2
 import advent.day_3
 import advent.day_4
+import advent.day_2025_1
 
 
 def entry_point():
     parser = argparse.ArgumentParser(prog="Advent of code 2023",
                                      description="Solutions of the calendar 2023")
+
+    parser.add_argument("year",
+                        choices=['2023', '2025'],
+                        help="Day of the puzzle")
 
     parser.add_argument("day",
                         choices=['1', '2', '3', '4'],
@@ -25,7 +30,10 @@ def entry_point():
     args = parser.parse_args()
     data_input = Path(args.data_input)
 
-    if args.day == '1':
+    if args.year == '2025':
+        advent.day_2025_1.puzzle_1("test")
+
+    elif args.day == '1':
         if args.puzzle_number == '1':
             result = advent.day_1.puzzle_1(data_input)
             print(f"D01P1 - Solution {result}")
