@@ -3,16 +3,15 @@ from pathlib import Path
 from importlib_resources import files
 from mock import Mock
 
-from advent.day_3 import (import_puzzle,
-                          find_numbers,
-                          car_has_adjacent_symbol,
-                          Number,
-                          DigitCoordinates,
-                          number_has_adjacent_symbol,
-                          puzzle_1,
-                          Star,
-                          find_starts,
-                          puzzle_2)
+from advent.year_2023.day_3 import (import_puzzle,
+                                    find_numbers,
+                                    car_has_adjacent_symbol,
+                                    Number,
+                                    DigitCoordinates,
+                                    number_has_adjacent_symbol,
+                                    day3,
+                                    Star,
+                                    find_starts)
 
 import advent.tests.resources.day_3
 
@@ -164,7 +163,7 @@ def test_number_has_adjacent_symbol(number: Number, expected: bool):
                                                     ("f_puzzle", 530495)])
 def test_puzzle_1(fixture_name, expected, request):
     input_puzzle = request.getfixturevalue(fixture_name)
-    assert puzzle_1(input_puzzle) == expected
+    assert day3.puzzle_1(input_puzzle) == expected
 
 
 # --- Puzzle 2 ---
@@ -213,4 +212,4 @@ def test_compute_gear_ratio(numbers, expected):
                                                     ("f_puzzle", 80253814)])
 def test_puzzle_2(fixture_name, expected, request):
     input_puzzle = request.getfixturevalue(fixture_name)
-    assert puzzle_2(input_puzzle) == expected
+    assert day3.puzzle_2(input_puzzle) == expected

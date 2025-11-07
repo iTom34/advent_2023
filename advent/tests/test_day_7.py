@@ -4,7 +4,7 @@ from importlib_resources import files
 from mock import Mock
 
 import advent.tests.resources.day_7
-from advent.day_7 import Hand, Card, Type, car_to_card, import_puzzle, puzzle_1
+from advent.year_2023.day_7 import Hand, Card, Type, car_to_card, import_puzzle, day7 
 
 IMPORTED_EXAMPLE = [Hand([Card.three, Card.two, Card.t, Card.three, Card.k], 765),
                     Hand([Card.t, Card.five, Card.five, Card.j, Card.five], 684),
@@ -236,4 +236,4 @@ class TestHand:
                                                     ("f_puzzle", 246644206)])
 def test_puzzle(puzzle_input: str, expected: int, request):
     puzzle_file = request.getfixturevalue(puzzle_input)
-    assert puzzle_1(puzzle_file) == expected
+    assert day7.puzzle_1(puzzle_file) == expected

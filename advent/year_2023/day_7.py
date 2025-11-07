@@ -229,6 +229,7 @@ def puzzle_1(input_file: Path) -> int:
 
     return result
 
+
 class Day7(advent.day.Day):
     def puzzle_1(self, input_file: Path) -> int:
         hands = import_puzzle(input_file)

@@ -4,7 +4,7 @@ from pathlib import Path
 from importlib_resources import files
 
 import advent.tests.resources.day_4
-from advent.day_4 import import_puzzle, Card, puzzle_1, CardNewRules, import_puzzle_2, process_copies, puzzle_2
+from advent.year_2023.day_4 import import_puzzle, Card, CardNewRules, day4, import_puzzle_2, process_copies 
 
 
 CARD_1 = Card(1, [59, 65, 20, 66, 55, 92, 43, 23, 98, 70], [99, 81, 56, 30, 88, 55, 57, 11, 90, 45, 53, 28, 33, 20, 84, 54, 24, 64, 74, 98, 36, 77, 61, 82, 69])
@@ -71,7 +71,7 @@ def test_import_puzzle(f_example_puzzle):
                                                     ("f_puzzle", 18519)])
 def test_puzzle_1(fixture_name, expected, request):
     puzzle_file = request.getfixturevalue(fixture_name)
-    assert puzzle_1(puzzle_file) == expected
+    assert day4.puzzle_1(puzzle_file) == expected
 
 
 # --- Puzzle 2 ---
@@ -161,4 +161,4 @@ def test_process_copies(cards_p2: list[CardNewRules]):
                                                     ("f_puzzle", 11787590)])
 def test_puzzle_2(fixture_name: str, expected: int, request):
     input_puzzle = request.getfixturevalue(fixture_name)
-    assert puzzle_2(input_puzzle) == expected
+    assert day4.puzzle_2(input_puzzle) == expected

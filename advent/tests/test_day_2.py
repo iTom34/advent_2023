@@ -1,7 +1,7 @@
 import pytest
 
-from advent.day_2 import parser, split_games, parser_set_key_values, possible_game, puzzle_1, minimum_cubes, \
-    computer_power, puzzle_2
+from advent.year_2023.day_2 import parser, split_games, parser_set_key_values, possible_game, day2, minimum_cubes, \
+    computer_power
 from importlib_resources import files
 from pathlib import Path
 
@@ -80,7 +80,7 @@ def test_possible_game(game: list, expected: bool):
                                                     ("f_puzzle_1", 2348)])
 def test_puzzle_1(fixture_name: str, expected: int, request):
     input_file = request.getfixturevalue(fixture_name)
-    assert puzzle_1(input_file) == expected
+    assert day2.puzzle_1(input_file) == expected
 
 
 # ---- Puzzle 2 ----
@@ -106,4 +106,4 @@ def test_compute_power(minimums: dict, expected: int):
                                                     ("f_puzzle_1", 76008)])
 def test_puzzle_2(fixture_name: str, expected: int, request):
     input_file = request.getfixturevalue(fixture_name)
-    assert puzzle_2(input_file) == expected
+    assert day2.puzzle_2(input_file) == expected

@@ -2,7 +2,7 @@ import pytest
 from importlib_resources import files
 from pathlib import Path
 
-from advent.day_1 import find_last_and_first_digit, puzzle_1, find_start_spelled_number, find_first_and_last_digit_puzzle_2, puzzle_2
+from advent.year_2023.day_1 import find_last_and_first_digit, day1, find_start_spelled_number, find_first_and_last_digit_puzzle_2
 
 import advent.tests.resources.day_1.puzzle_1
 import advent.tests.resources.day_1.puzzle_2
@@ -21,7 +21,7 @@ def example_puzzle_2() -> Path:
 
 
 def test_puzzle_1(example_puzzle_1):
-    assert puzzle_1(example_puzzle_1) == 142
+    assert day1.puzzle_1(example_puzzle_1) == 142
 
 
 @pytest.mark.parametrize("input, expected",
@@ -74,4 +74,4 @@ def test_find_first_and_last_digits_puzzle_2(input, expected):
 
 
 def test_puzzle_2(example_puzzle_2):
-    assert puzzle_2(example_puzzle_2) == 281
+    assert day1.puzzle_2(example_puzzle_2) == 281
