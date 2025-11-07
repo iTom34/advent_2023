@@ -5,7 +5,6 @@ import advent.year_2023.day_1
 import advent.year_2023.day_2
 import advent.year_2023.day_3
 import advent.year_2023.day_4
-import advent.year_2023.day_5
 import advent.year_2023.day_6
 import advent.year_2023.day_7
 import advent.year_2025.day_1
@@ -34,11 +33,10 @@ def entry_point():
 
     advent_2023 = {'1': advent.year_2023.day_1.day1,
                    '2': advent.year_2023.day_2.day2,
-                   '3': advent.year_2023.day_2.day3,
-                   '4': advent.year_2023.day_2.day4,
-                   '5': advent.year_2023.day_2.day5,
-                   '6': advent.year_2023.day_2.day6,
-                   '7': advent.year_2023.day_2.day7}
+                   '3': advent.year_2023.day_3.day3,
+                   '4': advent.year_2023.day_4.day4,
+                   '6': advent.year_2023.day_6.day6,
+                   '7': advent.year_2023.day_7.day7}
     advent_2025 = {'1': advent.year_2025.day_1.day1}
     years = {'2025': advent_2025,
              '2023': advent_2023}
@@ -48,9 +46,9 @@ def entry_point():
         if args.day in year:
             day = year[args.day]
             if args.puzzle_number == '1':
-                day.puzzle_1(args.data_input)
+                day.puzzle_1(data_input)
             elif args.puzzle_number == '2':
-                day.puzzle_2(args.data_input)
+                day.puzzle_2(data_input)
             else:
                 print(f"Puzzle {args.puzzle_number} is not implemented")
         else:

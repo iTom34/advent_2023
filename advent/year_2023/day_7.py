@@ -3,6 +3,8 @@ from enum import Enum
 from pathlib import Path
 from collections import Counter
 
+import advent.day
+
 
 class Card(Enum):
     a = 13
@@ -227,3 +229,16 @@ def puzzle_1(input_file: Path) -> int:
 
     return result
 
+class Day7(advent.day.Day):
+    def puzzle_1(self, input_file: Path) -> int:
+        hands = import_puzzle(input_file)
+
+        hands.sort()
+
+        result = 0
+        for index, hand in enumerate(hands):
+            result += (index + 1) * hand.beat
+
+        return result
+
+day7 = Day7()

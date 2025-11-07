@@ -1,4 +1,5 @@
 from pathlib import Path
+import advent.day
 
 
 class DigitCoordinates:
@@ -170,23 +171,6 @@ def number_has_adjacent_symbol(text: list[str], number: Number) -> bool:
 
     return False
 
-
-def puzzle_1(input_puzzle: Path) -> int:
-    """
-    Solves puzzle_1
-    """
-    sum = 0
-
-    text = import_puzzle(input_puzzle)
-    numbers = find_numbers(text)
-
-    for number in numbers:
-        if number_has_adjacent_symbol(text, number):
-            sum += number.value
-
-    return sum
-
-
 # --- Puzzle 2 ---
 
 class Star:
@@ -271,14 +255,32 @@ def find_starts(puzzle_input: list[str]) -> list[Star]:
     return stars
 
 
-def puzzle_2(input_puzzle: Path) -> int:
-    text = import_puzzle(input_puzzle)
-    numbers = find_numbers(text)
-    stars = find_starts(text)
+class Day3(advent.day.Day):
+    def puzzle_1(self, input: Path) -> int:
+        """
+        Solves puzzle_1
+        """
+        sum = 0
 
-    sum = 0
+        text = import_puzzle(input)
+        numbers = find_numbers(text)
 
-    for star in stars:
-        sum += star.compute_gear_ratio(numbers)
+        for number in numbers:
+            if number_has_adjacent_symbol(text, number):
+                sum += number.value
 
-    return sum
+        return sum
+
+    def puzzle_2(self, input: Path) -> int:
+        text = import_puzzle(input)
+        numbers = find_numbers(text)
+        stars = find_starts(text)
+
+        sum = 0
+
+        for star in stars:
+            sum += star.compute_gear_ratio(numbers)
+
+        return sum
+
+day3 = Day3()

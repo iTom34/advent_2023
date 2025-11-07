@@ -1,4 +1,4 @@
-
+import advent.day
 ACCELERATION_RATE: int = 1
 
 
@@ -50,14 +50,17 @@ class Race:
         return racing_time * speed
 
 
-def puzzle_1(races: list[Race]):
-    product = 1
-    for race in races:
-        product *= race.get_number_of_ways_to_beat_record()
+class Day6(advent.day.Day):
+    def puzzle_1(self, races: list[Race]):
+        product = 1
+        for race in races:
+            product *= race.get_number_of_ways_to_beat_record()
 
-    return product
+        return product
 
 
-def puzzle_2(race: Race):
-    return race.get_number_of_ways_to_beat_record()
+    def puzzle_2(self, race: Race):
+        return race.get_number_of_ways_to_beat_record()
+
+day6 = Day6()
 

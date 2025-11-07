@@ -1,5 +1,6 @@
 import re
 from pathlib import Path
+import advent.day
 
 REGULAR_EXPRESSION = r"Card. ? ?(\d+):  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d) \|  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)  ?(\d?\d)"
 
@@ -71,20 +72,6 @@ def import_puzzle(input_file: Path) -> list[Card]:
     return cards
 
 
-def puzzle_1(input_puzzle: Path) -> int:
-    """
-    Solves puzzle_1
-    """
-    sum = 0
-
-    cards = import_puzzle(input_puzzle)
-
-    for card in cards:
-        sum += card.computer_score()
-
-    return sum
-
-
 def import_puzzle_2(input_file: Path) -> list[CardNewRules]:
 
     with open(input_file, 'r') as file:
@@ -120,12 +107,28 @@ def process_copies(cards: list[CardNewRules]):
                 cards[sub_index].number_of_cards += card.number_of_cards
 
 
-def puzzle_2(input_puzzle: Path) -> int:
-    cards = import_puzzle_2(input_puzzle)
-    process_copies(cards)
+class Day4(advent.day.Day):
+    def puzzle_1(self, input: Path) -> int:
+        """
+        Solves puzzle_1
+        """
+        sum = 0
 
-    sum = 0
-    for card in cards:
-        sum += card.number_of_cards
+        cards = import_puzzle(input)
 
-    return sum
+        for card in cards:
+            sum += card.computer_score()
+
+        return sum
+
+    def puzzle_2(self, input: Path) -> int:
+        cards = import_puzzle_2(input)
+        process_copies(cards)
+
+        sum = 0
+        for card in cards:
+            sum += card.number_of_cards
+
+        return sum
+
+day4 = Day4()
