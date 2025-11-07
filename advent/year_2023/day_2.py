@@ -1,5 +1,6 @@
 from pathlib import Path
 import re
+import advent.day
 
 RED_QUANTITY = 12
 GREEN_QUANTITY = 13
@@ -94,21 +95,6 @@ def possible_game(sets: list) -> bool:
     return True
 
 
-def puzzle_1(input_puzzle: Path) -> int:
-    """
-    Solves the puzzle 1
-    :param input_puzzle: Input of the puzzle
-    :return: The solution
-    """
-    my_sum = 0
-
-    games = parser(input_puzzle)
-
-    for game_id, sets in games.items():
-        if possible_game(sets) is True:
-            my_sum += game_id
-
-    return my_sum
 
 # ---- Puzzle 2 ----
 
@@ -146,22 +132,42 @@ def computer_power(minimums: dict) -> int:
     return my_sum
 
 
-def puzzle_2(input_puzzle: Path) -> int:
-    """
-    Solves the puzzle 2
-    :param input_puzzle:
-    :return: Solution
-    """
-    my_sum = 0
 
-    games = parser(input_puzzle)
-    minimums: list[dict] = []
+class Day2(advent.day.Day):
+    def puzzle_1(self, input: Path) -> int:
+        """
+        Solves the puzzle 1
+        :param input: Input of the puzzle
+        :return: The solution
+        """
+        my_sum = 0
 
-    for sets in games.values():
-        minimums.append(minimum_cubes(sets))
+        games = parser(input)
 
-    my_sum = 0
-    for my_minimum in minimums:
-        my_sum += computer_power(my_minimum)
+        for game_id, sets in games.items():
+            if possible_game(sets) is True:
+                my_sum += game_id
 
-    return my_sum
+        return my_sum
+    
+    def puzzle_2(self, input: Path) -> int:
+        """
+        Solves the puzzle 2
+        :param input_puzzle:
+        :return: Solution
+        """
+        my_sum = 0
+
+        games = parser(input)
+        minimums: list[dict] = []
+
+        for sets in games.values():
+            minimums.append(minimum_cubes(sets))
+
+        my_sum = 0
+        for my_minimum in minimums:
+            my_sum += computer_power(my_minimum)
+
+        return my_sum
+
+day2 = Day2()

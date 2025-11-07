@@ -2,10 +2,12 @@ import argparse
 from pathlib import Path
 
 import advent.year_2023.day_1
-import advent.day_1
-import advent.day_2
-import advent.day_3
-import advent.day_4
+import advent.year_2023.day_2
+import advent.year_2023.day_3
+import advent.year_2023.day_4
+import advent.year_2023.day_5
+import advent.year_2023.day_6
+import advent.year_2023.day_7
 import advent.year_2025.day_1
 
 def entry_point():
@@ -30,7 +32,13 @@ def entry_point():
     args = parser.parse_args()
     data_input = Path(args.data_input)
 
-    advent_2023 = {'1': advent.year_2023.day_1.day1}
+    advent_2023 = {'1': advent.year_2023.day_1.day1,
+                   '2': advent.year_2023.day_2.day2,
+                   '3': advent.year_2023.day_2.day3,
+                   '4': advent.year_2023.day_2.day4,
+                   '5': advent.year_2023.day_2.day5,
+                   '6': advent.year_2023.day_2.day6,
+                   '7': advent.year_2023.day_2.day7}
     advent_2025 = {'1': advent.year_2025.day_1.day1}
     years = {'2025': advent_2025,
              '2023': advent_2023}

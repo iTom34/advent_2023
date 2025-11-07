@@ -18,7 +18,7 @@ class Day1(advent.day.Day):
 
         return sum
 
-    def puzzle_2(self, source: Path) -> int:
+    def puzzle_2(self, input: Path) -> int:
         """
         Solves puzzle 2 of day 1
         :param source: File containing the input of the puzzle
@@ -27,7 +27,7 @@ class Day1(advent.day.Day):
 
         sum = 0
 
-        with open(source, 'r') as file:
+        with open(input, 'r') as file:
             for line in file.readlines():
                 sum += find_first_and_last_digit_puzzle_2(line)
 
