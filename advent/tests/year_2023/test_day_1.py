@@ -4,19 +4,19 @@ from pathlib import Path
 
 from advent.year_2023.day_1 import find_last_and_first_digit, day1, find_start_spelled_number, find_first_and_last_digit_puzzle_2
 
-import advent.tests.resources.day_1.puzzle_1
-import advent.tests.resources.day_1.puzzle_2
+import advent.tests.resources.year_2023.day_1.puzzle_1
+import advent.tests.resources.year_2023.day_1.puzzle_2
 
 
 @pytest.fixture
 def example_puzzle_1() -> Path:
-    example = files(advent.tests.resources.day_1.puzzle_1).joinpath("example.txt")
+    example = files(advent.tests.resources.year_2023.day_1.puzzle_1).joinpath("example.txt")
     return Path(str(example))
 
 
 @pytest.fixture
 def example_puzzle_2() -> Path:
-    example = files(advent.tests.resources.day_1.puzzle_2).joinpath("example.txt")
+    example = files(advent.tests.resources.year_2023.day_1.puzzle_2).joinpath("example.txt")
     return Path(str(example))
 
 

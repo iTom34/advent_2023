@@ -5,7 +5,7 @@ from advent.year_2023.day_2 import parser, split_games, parser_set_key_values, p
 from importlib_resources import files
 from pathlib import Path
 
-import advent.tests.resources.day_2
+import advent.tests.resources.year_2023.day_2
 
 EXAMPLE = ["Game 1: 3 blue, 4 red; 1 red, 2 green, 6 blue; 2 green",
            "Game 2: 1 blue, 2 green; 3 green, 4 blue, 1 red; 1 green, 1 blue",
@@ -34,13 +34,13 @@ EXAMPLE_PARSED = {1: [{('blue', 3), ('red', 4)},
 
 @pytest.fixture
 def f_example_puzzle_1() -> Path:
-    example = files(advent.tests.resources.day_2).joinpath("example_puzzle_1.txt")
+    example = files(advent.tests.resources.year_2023.day_2).joinpath("example_puzzle_1.txt")
     return Path(str(example))
 
 
 @pytest.fixture
 def f_puzzle_1() -> Path:
-    example = files(advent.tests.resources.day_2).joinpath("puzzle_1_input.txt")
+    example = files(advent.tests.resources.year_2023.day_2).joinpath("puzzle_1_input.txt")
     return Path(str(example))
 
 
