@@ -13,7 +13,7 @@ from advent.year_2023.day_3 import (import_puzzle,
                                     Star,
                                     find_starts)
 
-import advent.tests.resources.day_3
+import advent.tests.resources.year_2023.day_3
 
 EXAMPLE_PUZZLE_PARSED = ["467..114..",
                          "...*......",
@@ -88,13 +88,13 @@ NUMBERS_IN_PUZZLE = [number_467,
 
 @pytest.fixture
 def f_example_puzzle() -> Path:
-    example = files(advent.tests.resources.day_3).joinpath("example_puzzle.txt")
+    example = files(advent.tests.resources.year_2023.day_3).joinpath("example_puzzle.txt")
     return Path(str(example))
 
 
 @pytest.fixture
 def f_puzzle() -> Path:
-    example = files(advent.tests.resources.day_3).joinpath("puzzle.txt")
+    example = files(advent.tests.resources.year_2023.day_3).joinpath("puzzle.txt")
     return Path(str(example))
 
 class TestDigitCoordinate:
